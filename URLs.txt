@@ -1,0 +1,6 @@
+https://products.wolframalpha.com/short-answers-api/documentation
+https://api.wolframalpha.com/v1/result?appid=VREVQ3-569LQH64YQ&i=This+is+a+right-handed+golfers+shot+that+veers+to+the+right%3f
+
+http://jservice.io/
+https://jservice.io/api/clues?value=100&category=91
+https://jservice.io/api/categories?count=5&offset=67
