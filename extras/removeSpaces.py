@@ -1,0 +1,1 @@
+print(input("enter string: ").replace(" ", "+"))
