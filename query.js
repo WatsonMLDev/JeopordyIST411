@@ -2,6 +2,7 @@ const API_TOKEN = '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'
 let questionJson;
 let AIAnswer;
 let categoryArray;
+let questionArray;
 
 function getAiResponse(question){
     let request = new XMLHttpRequest();
@@ -35,9 +36,6 @@ function getAiResponse(question){
         }
     }
 
-
-
-
 }
 function getQuestion() {
     let request = new XMLHttpRequest();
@@ -56,17 +54,13 @@ function getQuestion() {
         questionJson = question[0]
         getAiResponse(questionJson.question)
 
-
-
-
-
     }
     //console.log(`the question is ${test}`)
 
 }
 
 
-function setUpCategories(){
+function setUpCategoriesAndQuestions(){
     let randomNum = 1
     let request = new XMLHttpRequest();
     request.open("GET", `https://jservice.io/api/categories?count=5&offset=${randomNum}`, true);
@@ -76,7 +70,7 @@ function setUpCategories(){
             console.log(`Error ${request.status}: ${request.statusText}`);
             return;
         }
-        categoryArray = JSON.parse(this.response);
+        categoryArray = JSON.parse(this.response)
         console.log(categoryArray)
         categoryArray.forEach((category,index) => {
             cat = document.querySelector("#cat"+(index+1))
@@ -85,5 +79,16 @@ function setUpCategories(){
 
         })
     }
+
+    request = new XMLHttpRequest();
+
+    for(let i = 0; i < 5; i++) {
+        request.open("GET", `https://jservice.io/api/category?category=${categoryArray[0].id}`, true);
+        request.send()
+
+    }
 }
+
+
+setUpCategoriesAndQuestions()
 
