@@ -7,13 +7,39 @@
     </head>
     <body>
         <div>
-            <table width = "90%" style="border:solid; background-color: darkslateblue">
+            <table id="catSelector" class="visibleCatSelector">
+                <tr>
+                    <td><label for="checkboxCat1" id="cat1"></label><input type="checkbox" value="0" id="checkboxCat1"></td>
+                    <td><label for="checkboxCat2" id="cat2"></label><input type="checkbox" value="1" id="checkboxCat2"></td>
+                    <td><label for="checkboxCat3" id="cat3"></label><input type="checkbox" value="2" id="checkboxCat3"></td>
+                    <td><label for="checkboxCat4" id="cat4"></label><input type="checkbox" value="3" id="checkboxCat4"></td>
+                    <td><label for="checkboxCat5" id="cat5"></label><input type="checkbox" value="4" id="checkboxCat5"></td>
+                </tr>
+                <tr>
+                    <td><label for="checkboxCat6" id="cat6"></label><input type="checkbox" value="5" id="checkboxCat6"></td>
+                    <td><label for="checkboxCat7" id="cat7"></label><input type="checkbox" value="6" id="checkboxCat7"></td>
+                    <td><label for="checkboxCat8" id="cat8"></label><input type="checkbox" value="7" id="checkboxCat8"></td>
+                    <td><label for="checkboxCat9" id="cat9"></label><input type="checkbox" value="8" id="checkboxCat9"></td>
+                    <td><label for="checkboxCat10" id="cat10"></label><input type="checkbox" value="9" id="checkboxCat10"></td>
+                </tr>
+            </table>
+            <input type="button" onclick="createGame();" id="submitCat" class="visibleSaveButton">
+        </div>
+        <div>
+            <table id="jeopardyBoard" class="invisibleJeopardy">
                 <tr style="background-color: bisque;">
-                    <th id="cat1"></th>
-                    <th id="cat2"></th>
-                    <th id="cat3"></th>
-                    <th id="cat4"></th>
-                    <th id="cat5"></th>
+                    <th id="finalCat1"></th>
+                    <th id="finalCat2"></th>
+                    <th id="finalCat3"></th>
+                    <th id="finalCat4"></th>
+                    <th id="finalCat5"></th>
+                </tr>
+                <tr>
+                    <td><button id="100cat1" class="jepButton">$100</button></td>
+                    <td><button id="100cat2" class="jepButton">$100</button></td>
+                    <td><button id="100cat3" class="jepButton">$100</button></td>
+                    <td><button id="100cat4" class="jepButton">$100</button></td>
+                    <td><button id="100cat5" class="jepButton">$100</button></td>
                 </tr>
                 <tr>
                     <td><button id="200cat1" class="jepButton">$200</button></td>
@@ -23,6 +49,13 @@
                     <td><button id="200cat5" class="jepButton">$200</button></td>
                 </tr>
                 <tr>
+                    <td><button id="300cat1" class="jepButton">$300</button></td>
+                    <td><button id="300cat2" class="jepButton">$300</button></td>
+                    <td><button id="300cat3" class="jepButton">$300</button></td>
+                    <td><button id="300cat4" class="jepButton">$300</button></td>
+                    <td><button id="300cat5" class="jepButton">$300</button></td>
+                </tr>
+                <tr>
                     <td><button id="400cat1" class="jepButton">$400</button></td>
                     <td><button id="400cat2" class="jepButton">$400</button></td>
                     <td><button id="400cat3" class="jepButton">$400</button></td>
@@ -30,25 +63,11 @@
                     <td><button id="400cat5" class="jepButton">$400</button></td>
                 </tr>
                 <tr>
-                    <td><button id="600cat1" class="jepButton">$600</button></td>
-                    <td><button id="600cat2" class="jepButton">$600</button></td>
-                    <td><button id="600cat3" class="jepButton">$600</button></td>
-                    <td><button id="600cat4" class="jepButton">$600</button></td>
-                    <td><button id="600cat5" class="jepButton">$600</button></td>
-                </tr>
-                <tr>
-                    <td><button id="800cat1" class="jepButton">$800</button></td>
-                    <td><button id="800cat2" class="jepButton">$800</button></td>
-                    <td><button id="800cat3" class="jepButton">$800</button></td>
-                    <td><button id="800cat4" class="jepButton">$800</button></td>
-                    <td><button id="800cat5" class="jepButton">$800</button></td>
-                </tr>
-                <tr>
-                    <td><button id="1000cat1" class="jepButton">$1000</button></td>
-                    <td><button id="1000cat2" class="jepButton">$1000</button></td>
-                    <td><button id="1000cat3" class="jepButton">$1000</button></td>
-                    <td><button id="1000cat4" class="jepButton">$1000</button></td>
-                    <td><button id="1000cat5" class="jepButton">$1000</button></td>
+                    <td><button id="500cat1" class="jepButton">$500</button></td>
+                    <td><button id="500cat2" class="jepButton">$500</button></td>
+                    <td><button id="500cat3" class="jepButton">$500</button></td>
+                    <td><button id="500cat4" class="jepButton">$500</button></td>
+                    <td><button id="500cat5" class="jepButton">$500</button></td>
                 </tr>
             </table>
         </div>

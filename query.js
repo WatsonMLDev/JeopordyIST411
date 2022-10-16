@@ -1,94 +1,145 @@
 const API_TOKEN = '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'
-let questionJson;
-let AIAnswer;
+const valueArray = [100,200,300,400,500]
 let categoryArray;
-let questionArray;
+let questionArray =[[],[],[],[],[]]
+
+
 
 function getAiResponse(question){
     let request = new XMLHttpRequest();
-    request.open("POST",  "https://api-inference.huggingface.co/models/bigscience/bloom", true);
-    request.setRequestHeader("Authorization", "Bearer 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");
+    request.open("POST",  "https://api-inference.huggingface.co/models/bigscience/bloom", false);
+    request.setRequestHeader("Authorization", `Bearer ${API_TOKEN}`);
     request.send(JSON.stringify({"inputs": `Question 1: Please answer the following Jeopardy question,\nHost: ${question}.\nAnswer: \"what is ____\"\na.`}));
-    let singleAnswer
-    request.onload = function() {
-        if (request.status < 200 && request.status >= 400) {
-            console.log(`Error ${request.status}: ${request.statusText}`);
-            return;
-        }
-        let response = JSON.parse(this.response);
-        const nonNouns = ["a ","the "]
 
-        let responseWithoutQuestion = response[0].generated_text.replace(`Question 1: Please answer the following Jeopardy question,\nHost: ${question}.\nAnswer: \"what is ____\"\n`, "")
-        singleAnswer = responseWithoutQuestion.split("\n")[0].replace("a.", "")
-
-        nonNouns.forEach((word) => {
-            if (singleAnswer.includes(word)){
-                singleAnswer = singleAnswer.replace(word.replace(" ",""), "")
-            }
-        })
-        AIAnswer = singleAnswer.trim()
-        console.log(`the AI answer is ${AIAnswer}`)
-        console.log(`the real Answer is ${questionJson.answer}`)
-        if (questionJson.answer.toLowerCase() === AIAnswer.toLowerCase()){
-            console.log("Correct")
-        } else {
-            console.log("Incorrect")
-        }
+    if (request.status < 200 && request.status >= 400) {
+        console.log(`Error ${request.status}: ${request.statusText}`);
+        return;
     }
 
-}
-function getQuestion() {
-    let request = new XMLHttpRequest();
-    request.open("GET", "https://jservice.io/api/random?count=1", true);
-    request.send()
-    //let test;
-    request.onload = function () {
-        if (request.status < 200 && request.status >= 400) {
-            console.log(`Error ${request.status}: ${request.statusText}`);
-            return;
+    let response = JSON.parse(this.response);
+    const nonNouns = ["a ","the "]
+
+    let responseWithoutQuestion = response[0].generated_text.replace(`Question 1: Please answer the following Jeopardy question,\nHost: ${question}.\nAnswer: \"what is ____\"\n`, "")
+    let singleAnswer = responseWithoutQuestion.split("\n")[0].replace("a.", "")
+
+    nonNouns.forEach((word) => {
+        if (singleAnswer.includes(word)){
+            singleAnswer = singleAnswer.replace(word.replace(" ",""), "")
         }
-
-        question = JSON.parse(this.response);
-        console.log(question[0].question)
-
-        questionJson = question[0]
-        getAiResponse(questionJson.question)
-
-    }
-    //console.log(`the question is ${test}`)
+    })
+    return singleAnswer.trim()
 
 }
 
 
-function setUpCategoriesAndQuestions(){
-    let randomNum = 1
+
+function setUpCategories(){
+    let randomNum = Math.floor(Math.random() * 6703) // replace with 1 to keep it simple for testing
+    let amount = 10 //10 is hardcoded into index.html, change it there if you want to change it here as well
+
     let request = new XMLHttpRequest();
-    request.open("GET", `https://jservice.io/api/categories?count=5&offset=${randomNum}`, true);
+    request.open("GET", `https://jservice.io/api/categories?count=${amount}&offset=${randomNum}`, true);
     request.send()
     request.onload = function () {
+
+        // if a bad response, just return before running anymore code
         if (request.status < 200 && request.status >= 400) {
             console.log(`Error ${request.status}: ${request.statusText}`);
             return;
         }
         categoryArray = JSON.parse(this.response)
-        console.log(categoryArray)
+
+        // block of code to put the categories on the category selector
         categoryArray.forEach((category,index) => {
             cat = document.querySelector("#cat"+(index+1))
-            console.log(category)
             cat.innerHTML = category.title
 
         })
     }
-
-    request = new XMLHttpRequest();
-
-    for(let i = 0; i < 5; i++) {
-        request.open("GET", `https://jservice.io/api/category?category=${categoryArray[0].id}`, true);
-        request.send()
-
-    }
 }
 
+function createQuestions(){
+    categoryArray.forEach((category,index) => {
+        let request = new XMLHttpRequest();
+        request.open("GET", `https://jservice.io/api/category?id=${category.id}`, false); // most annoying issue ever, had to make it false to get it to work. forces response to be synchronous
+        request.send()
+        let data = JSON.parse(request.response);
 
-setUpCategoriesAndQuestions()
+        // if a bad response, just return before running anymore code
+        if (request.status < 200 && request.status >= 400) {
+            console.log(`Error ${request.status}: ${request.statusText}`);
+            return "Error";
+        }
+
+        // block of code to separate all questions by value
+        let seperatedQuestionArray = [[],[],[],[],[]]
+        data.clues.forEach((clue) => {
+            if(valueArray.includes(clue.value)){
+                seperatedQuestionArray[valueArray.indexOf(clue.value)].push(clue)
+            }
+        })
+
+        // block of code to randomly select 1 question for each value, if there are no questions for that value, it will make it "No Question"
+        let randomQuestionsForCategory = []
+        let counter = 0
+        while (randomQuestionsForCategory.length < 5) {
+            if (seperatedQuestionArray[counter].length === 0){
+                randomQuestionsForCategory.push("No Question")
+            } else {
+                let randomNum = Math.floor(Math.random() * seperatedQuestionArray[counter].length)
+                if (!randomQuestionsForCategory.includes(randomNum)) {
+                    randomQuestionsForCategory.push(seperatedQuestionArray[counter][randomNum])
+                    counter++
+                }
+            }
+        }
+
+        // block of code to set each random question to the main game board in the correct position
+        questionArray.forEach((categoryArrayOfQuestions, index) => {
+            categoryArrayOfQuestions.push(randomQuestionsForCategory[index])
+        })
+
+    })
+}
+
+function createGame(){
+    // add the 5 categories selected to the game
+    let tempArray = []
+    categoryArray.forEach((category, index) => {
+        if(document.querySelector("#checkboxCat" + (index+1)).checked){
+            tempArray.push(category)
+        }
+    })
+
+    //force the user to select 5 categories
+    if (tempArray.length < 5){
+        alert("Please select at least 5 categories")
+        return;
+    }
+    categoryArray = tempArray
+
+    // transitions to the main game board by hiding category selector
+    let submitButton = document.querySelector("#submitCat").classList
+    submitButton.remove("visibleSaveButton")
+    submitButton.add("invisibleSaveButton")
+    let catSelectorTable = document.querySelector("#catSelector").classList
+    catSelectorTable.remove("visibleCatSelector")
+    catSelectorTable.add("invisibleCatSelector")
+    let jBoard = document.querySelector("#jeopardyBoard").classList
+    jBoard.remove("invisibleJeopardy")
+    jBoard.add("visibleJeopardy")
+
+    //puts the categories on the game board header
+    categoryArray.forEach((category,index) => {
+        cat = document.querySelector("#finalCat"+(index+1))
+        cat.innerHTML = category.title
+
+    })
+    createQuestions()
+
+    console.log(questionArray)
+
+}
+
+setUpCategories()
 

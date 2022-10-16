@@ -3,3 +3,43 @@
     background-color: darkslateblue;
     font-weight: bold;
 }
+.invisibleSaveButton {
+    visibility: hidden;
+}
+.visibleSaveButton {
+    visibility: visible;
+}
+
+.invisibleCatSelector {
+    visibility: hidden;
+    position: absolute;
+    top: -9999px;
+    border:solid;
+    background-color: darkslateblue;
+    width: 90%;
+}
+
+.visibleCatSelector {
+    visibility: visible;
+    position: static;
+    border:solid;
+    background-color: darkslateblue;
+    width: 90%;
+}
+
+.invisibleJeopardy {
+    visibility: hidden;
+    position: absolute;
+    top: -9999px;
+    border:solid;
+    background-color: darkslateblue;
+    width: 90%;
+}
+
+.visibleJeopardy {
+    visibility: visible;
+    position: static;
+    border:solid;
+    background-color: darkslateblue;
+    width: 90%;
+}
