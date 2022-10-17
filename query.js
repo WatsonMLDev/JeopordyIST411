@@ -1,6 +1,6 @@
 const API_TOKEN = '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'
 const valueArray = [100,200,300,400,500]
-let categoryArray;
+let categoryArray
 let questionArray =[[],[],[],[],[]]
 let currentQuestion
 let aiScore = 0
@@ -27,7 +27,7 @@ function getAiResponse(question){
         return;
     }
 
-    let response = JSON.parse(this.response);
+    let response = JSON.parse(request.response);
     const nonNouns = ["a ","the "]
 
     let responseWithoutQuestion = response[0].generated_text.replace(`Question 1: Please answer the following Jeopardy question,\nHost: ${question}.\nAnswer: \"what is ____\"\n`, "")
@@ -42,7 +42,14 @@ function getAiResponse(question){
 
 }
 
-function showQuestion(row, column, buttonId){
+function showQuestion(row, column, button){
+    currentQuestion = questionArray[row][column]
+    button.disabled = true
+
+    if (currentQuestion === "No question"){
+        return
+    }
+
     let questionHeader = document.querySelector("#questionHeader").classList
     questionHeader.remove("questionInvisibleText")
     questionHeader.add("questionVisibleText")
@@ -51,7 +58,7 @@ function showQuestion(row, column, buttonId){
     questionLabel.classList.remove("questionInvisibleText")
     questionLabel.classList.add("questionVisibleText")
     questionLabel.innerHTML = questionArray[row][column].question
-    currentQuestion = questionArray[row][column]
+    questionArray[row][column] = null
 
     let responseDescription = document.querySelector("#responseDescription").classList
     responseDescription.remove("answerInvisibleText")
@@ -63,8 +70,22 @@ function showQuestion(row, column, buttonId){
     submitAnswer.remove("answerBoxInvisible")
     submitAnswer.add("answerBoxVisible")
 
-    console.log(document.querySelector("#jeopardyBoard").rows[row+1].cells.item(column))
-    console.log(currentQuestion.answer)
+    let answerResultDescription = document.querySelector("#answerResultDescription").classList
+    answerResultDescription.remove("answerVisibleText")
+    answerResultDescription.add("answerInvisibleText")
+    let answerResult = document.querySelector("#answerResult")
+    answerResult.classList.remove("answerVisibleText")
+    answerResult.classList.add("answerInvisibleText")
+
+    let aiResultDescription = document.querySelector("#aiResultDescription")
+    aiResultDescription.classList.remove("answerVisibleText")
+    aiResultDescription.classList.add("answerInvisibleText")
+    let aiResult = document.querySelector("#aiResult")
+    aiResult.classList.remove("answerVisibleText")
+    aiResult.classList.add("answerInvisibleText")
+
+    console.log(`Cheater, shame....: ${currentQuestion.answer}`)
+
 }
 function submitAnswer(){
     let answer = document.querySelector("#responseBox").value
@@ -80,10 +101,58 @@ function submitAnswer(){
     if(answer.toLowerCase() === currentQuestion.answer.toLowerCase()){
         answerResult.innerHTML = "Correct!"
         humanScore += currentQuestion.value
+        document.querySelector("#humanScore").innerHTML = humanScore
     }
     else{
         answerResult.innerHTML = "Incorrect!"
     }
+
+    aiTurn()
+}
+
+function aiTurn(){
+    let aiQuestion
+    while (true){
+        let row = Math.floor(Math.random() * 5)
+        let column = Math.floor(Math.random() * 5)
+        if (questionArray[row][column] !== null){
+            aiQuestion = questionArray[row][column]
+            questionArray[row][column] = null
+            document.querySelector("#jeopardyBoard").rows[row+1].cells[column].getElementsByTagName("button")[0].disabled = true
+            break;
+        }
+    }
+
+    if (aiQuestion === "No question"){
+        return
+    }
+
+    let aiAnswer = getAiResponse(aiQuestion.question)
+
+    console.log('-------------------------------------')
+    console.log(`AI Answer: ${aiAnswer}`)
+    console.log(`Correct Answer: ${aiQuestion.answer}`)
+    console.log('-------------------------------------')
+
+    let aiResultDescription = document.querySelector("#aiResultDescription")
+    aiResultDescription.classList.remove("answerInvisibleText")
+    aiResultDescription.classList.add("answerVisibleText")
+
+    let aiResult = document.querySelector("#aiResult")
+    aiResult.classList.remove("answerInvisibleText")
+    aiResult.classList.add("answerVisibleText")
+
+    aiResultDescription.innerHTML = `AI's question:  ${aiQuestion.question}`
+    if(aiAnswer.toLowerCase() === aiQuestion.answer.toLowerCase()){
+        aiResult.innerHTML = `AI answer: ${aiAnswer}.....Correct!`
+        aiScore += aiQuestion.value
+        document.querySelector("#aiScore").innerHTML = aiScore
+    }
+    else{
+        aiResult.innerHTML = `AI answer: ${aiAnswer}.....Incorrect!`
+    }
+
+
 
 }
 function setUpCategories(){
@@ -183,7 +252,7 @@ function createGame(){
     jBoard.remove("invisibleJeopardy")
     jBoard.add("visibleJeopardy")
 
-
+    document.querySelector("#score").style.visibility = "visible"
 
     //puts the categories on the game board header
     categoryArray.forEach((category,index) => {

@@ -9,7 +9,9 @@
 .customBody {
     background-color: black;
 }
-
+.scores{
+    color: goldenrod;
+}
 .questionInvisibleText {
     color: goldenrod;
     visibility: hidden;

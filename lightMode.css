@@ -9,6 +9,10 @@
     background-color: white;
 }
 
+.scores{
+    color: black;
+}
+
 .questionInvisibleText {
     color: black;
     visibility: hidden;
