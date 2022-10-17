@@ -63,11 +63,11 @@ function showQuestion(row, column, buttonId){
     submitAnswer.remove("answerBoxInvisible")
     submitAnswer.add("answerBoxVisible")
 
-    let button = document.querySelector("#"+buttonId)
-    console.log(getAiResponse(questionArray[row][column].answer))
+    console.log(document.querySelector("#jeopardyBoard").rows[row+1].cells.item(column))
+    console.log(currentQuestion.answer)
 }
 function submitAnswer(){
-    let answer = document.querySelector("#submitAnswer").value
+    let answer = document.querySelector("#responseBox").value
 
     let answerResultDescription = document.querySelector("#answerResultDescription").classList
     answerResultDescription.remove("answerInvisibleText")
