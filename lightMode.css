@@ -1,0 +1,50 @@
+.invisibleSaveButton {
+    visibility: hidden;
+}
+.visibleSaveButton {
+    visibility: visible;
+}
+/*light mode*/
+.customBody {
+    background-color: white;
+}
+
+.jepLButton {
+    color: #000000;
+    background-color: #3d8b82;
+    font-weight: bold;
+}
+
+.invisibleCatSelector {
+    visibility: hidden;
+    position: absolute;
+    top: -9999px;
+    border:solid;
+    background-color: #3d8b82;
+    width: 90%;
+}
+
+.visibleCatSelector {
+    visibility: visible;
+    position: static;
+    border:solid;
+    background-color: #3d8b82;
+    width: 90%;
+}
+
+.invisibleJeopardy {
+    visibility: hidden;
+    position: absolute;
+    top: -9999px;
+    border:solid;
+    background-color: #3d8b82;
+    width: 90%;
+}
+
+.visibleJeopardy {
+    visibility: visible;
+    position: static;
+    border:solid;
+    background-color: #3d8b82;
+    width: 90%;
+}

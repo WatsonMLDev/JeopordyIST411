@@ -1,13 +1,19 @@
-.jepButton {
-    color:goldenrod;
-    background-color: darkslateblue;
-    font-weight: bold;
-}
 .invisibleSaveButton {
     visibility: hidden;
 }
 .visibleSaveButton {
     visibility: visible;
+}
+
+/*Dark mode*/
+.customBody {
+    background-color: black;
+}
+
+.jepButton {
+    color:goldenrod;
+    background-color: darkslateblue;
+    font-weight: bold;
 }
 
 .invisibleCatSelector {
@@ -43,3 +49,4 @@
     background-color: darkslateblue;
     width: 90%;
 }
+/*light mode*

@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
-        <link rel="stylesheet" href="index.css">
+        <link id="styleSheet" rel="stylesheet" href="darkMode.css">
     </head>
-    <body>
+    <body class = "customBody">
         <div>
             <table id="catSelector" class="visibleCatSelector">
                 <tr>
@@ -35,42 +35,58 @@
                     <th id="finalCat5"></th>
                 </tr>
                 <tr>
-                    <td><button id="100cat1" class="jepButton">$100</button></td>
-                    <td><button id="100cat2" class="jepButton">$100</button></td>
-                    <td><button id="100cat3" class="jepButton">$100</button></td>
-                    <td><button id="100cat4" class="jepButton">$100</button></td>
-                    <td><button id="100cat5" class="jepButton">$100</button></td>
+                    <td><button id="100cat1" onclick='showQuestion(this.id);'class="jepButton">$100</button></td>
+                    <td><button id="100cat2" onclick='showQuestion(this.id);'class="jepButton">$100</button></td>
+                    <td><button id="100cat3" onclick='showQuestion(this.id);'class="jepButton">$100</button></td>
+                    <td><button id="100cat4" onclick='showQuestion(this.id);'class="jepButton">$100</button></td>
+                    <td><button id="100cat5" onclick='showQuestion(this.id);'class="jepButton">$100</button></td>
                 </tr>
                 <tr>
-                    <td><button id="200cat1" class="jepButton">$200</button></td>
-                    <td><button id="200cat2" class="jepButton">$200</button></td>
-                    <td><button id="200cat3" class="jepButton">$200</button></td>
-                    <td><button id="200cat4" class="jepButton">$200</button></td>
-                    <td><button id="200cat5" class="jepButton">$200</button></td>
+                    <td><button id="200cat1" onclick='showQuestion(this.id);'class="jepButton">$200</button></td>
+                    <td><button id="200cat2" onclick='showQuestion(this.id);'class="jepButton">$200</button></td>
+                    <td><button id="200cat3" onclick='showQuestion(this.id);'class="jepButton">$200</button></td>
+                    <td><button id="200cat4" onclick='showQuestion(this.id);'class="jepButton">$200</button></td>
+                    <td><button id="200cat5" onclick='showQuestion(this.id);'class="jepButton">$200</button></td>
                 </tr>
                 <tr>
-                    <td><button id="300cat1" class="jepButton">$300</button></td>
-                    <td><button id="300cat2" class="jepButton">$300</button></td>
-                    <td><button id="300cat3" class="jepButton">$300</button></td>
-                    <td><button id="300cat4" class="jepButton">$300</button></td>
-                    <td><button id="300cat5" class="jepButton">$300</button></td>
+                    <td><button id="300cat1" onclick='showQuestion(this.id);'class="jepButton">$300</button></td>
+                    <td><button id="300cat2" onclick='showQuestion(this.id);'class="jepButton">$300</button></td>
+                    <td><button id="300cat3" onclick='showQuestion(this.id);'class="jepButton">$300</button></td>
+                    <td><button id="300cat4" onclick='showQuestion(this.id);'class="jepButton">$300</button></td>
+                    <td><button id="300cat5" onclick='showQuestion(this.id);'class="jepButton">$300</button></td>
                 </tr>
                 <tr>
-                    <td><button id="400cat1" class="jepButton">$400</button></td>
-                    <td><button id="400cat2" class="jepButton">$400</button></td>
-                    <td><button id="400cat3" class="jepButton">$400</button></td>
-                    <td><button id="400cat4" class="jepButton">$400</button></td>
-                    <td><button id="400cat5" class="jepButton">$400</button></td>
+                    <td><button id="400cat1" onclick='showQuestion(this.id);'class="jepButton">$400</button></td>
+                    <td><button id="400cat2" onclick='showQuestion(this.id);'class="jepButton">$400</button></td>
+                    <td><button id="400cat3" onclick='showQuestion(this.id);'class="jepButton">$400</button></td>
+                    <td><button id="400cat4" onclick='showQuestion(this.id);'class="jepButton">$400</button></td>
+                    <td><button id="400cat5" onclick='showQuestion(this.id);'class="jepButton">$400</button></td>
                 </tr>
                 <tr>
-                    <td><button id="500cat1" class="jepButton">$500</button></td>
-                    <td><button id="500cat2" class="jepButton">$500</button></td>
-                    <td><button id="500cat3" class="jepButton">$500</button></td>
-                    <td><button id="500cat4" class="jepButton">$500</button></td>
-                    <td><button id="500cat5" class="jepButton">$500</button></td>
+                    <td><button id="500cat1" onclick='showQuestion(this.id);'class="jepButton">$500</button></td>
+                    <td><button id="500cat2" onclick='showQuestion(this.id);'class="jepButton">$500</button></td>
+                    <td><button id="500cat3" onclick='showQuestion(this.id);'class="jepButton">$500</button></td>
+                    <td><button id="500cat4" onclick='showQuestion(this.id);'class="jepButton">$500</button></td>
+                    <td><button id="500cat5" onclick='showQuestion(this.id);'class="jepButton">$500</button></td>
                 </tr>
             </table>
         </div>
+        <div>
+            <p id="questionField"></p><br><br>
+            <input type="text" id="responseBox"><br>
+
+            <button id="submit" onclick="submitAnswer();">Submit Answer</button>
+            <p id="aiResponseField"></p><br>
+            <p id="responseField"></p><br><br>
+        </div>
+        <div>
+            <label for="themeSelect"></label>
+            <select id="themeSelect" onchange="onDropdownChange();">
+                <option selected value="0">Dark Mode</option>
+                <option value="1">Light Mode</option>
+            </select>
+        </div>
+
 
       <script src="query.js" defer></script>
     </body>

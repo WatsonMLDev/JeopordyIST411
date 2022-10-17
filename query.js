@@ -2,8 +2,17 @@ const API_TOKEN = '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'
 const valueArray = [100,200,300,400,500]
 let categoryArray;
 let questionArray =[[],[],[],[],[]]
+let isDarkMode = true
 
-
+function onDropdownChange(){
+    let dropdown = document.querySelector("#themeSelect").selectedIndex
+    if (dropdown === 0){
+        document.querySelector("#styleSheet").href = "darkMode.css"
+    }
+    else{
+        document.querySelector("#styleSheet").href = "lightMode.css"
+    }
+}
 
 function getAiResponse(question){
     let request = new XMLHttpRequest();
@@ -31,7 +40,10 @@ function getAiResponse(question){
 
 }
 
-
+function showQuestion(id){
+    document.querySelector("#questionField").innerHTML = questionData[randomQuestionNumber].question
+    console.log(questionData[randomQuestionNumber].question)
+}
 
 function setUpCategories(){
     let randomNum = Math.floor(Math.random() * 6703) // replace with 1 to keep it simple for testing
@@ -119,6 +131,7 @@ function createGame(){
     categoryArray = tempArray
 
     // transitions to the main game board by hiding category selector
+
     let submitButton = document.querySelector("#submitCat").classList
     submitButton.remove("visibleSaveButton")
     submitButton.add("invisibleSaveButton")
@@ -128,6 +141,8 @@ function createGame(){
     let jBoard = document.querySelector("#jeopardyBoard").classList
     jBoard.remove("invisibleJeopardy")
     jBoard.add("visibleJeopardy")
+
+
 
     //puts the categories on the game board header
     categoryArray.forEach((category,index) => {
