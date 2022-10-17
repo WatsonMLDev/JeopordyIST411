@@ -2,7 +2,9 @@ const API_TOKEN = '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'
 const valueArray = [100,200,300,400,500]
 let categoryArray;
 let questionArray =[[],[],[],[],[]]
-let isDarkMode = true
+let currentQuestion
+let aiScore = 0
+let humanScore = 0
 
 function onDropdownChange(){
     let dropdown = document.querySelector("#themeSelect").selectedIndex
@@ -40,11 +42,50 @@ function getAiResponse(question){
 
 }
 
-function showQuestion(id){
-    document.querySelector("#questionField").innerHTML = questionData[randomQuestionNumber].question
-    console.log(questionData[randomQuestionNumber].question)
-}
+function showQuestion(row, column, buttonId){
+    let questionHeader = document.querySelector("#questionHeader").classList
+    questionHeader.remove("questionInvisibleText")
+    questionHeader.add("questionVisibleText")
 
+    let questionLabel = document.querySelector("#questionLabel")
+    questionLabel.classList.remove("questionInvisibleText")
+    questionLabel.classList.add("questionVisibleText")
+    questionLabel.innerHTML = questionArray[row][column].question
+    currentQuestion = questionArray[row][column]
+
+    let responseDescription = document.querySelector("#responseDescription").classList
+    responseDescription.remove("answerInvisibleText")
+    responseDescription.add("answerVisibleText")
+    let responseBox = document.querySelector("#responseBox").classList
+    responseBox.remove("answerBoxInvisible")
+    responseBox.add("answerBoxVisible")
+    let submitAnswer = document.querySelector("#submitAnswer").classList
+    submitAnswer.remove("answerBoxInvisible")
+    submitAnswer.add("answerBoxVisible")
+
+    let button = document.querySelector("#"+buttonId)
+    console.log(getAiResponse(questionArray[row][column].answer))
+}
+function submitAnswer(){
+    let answer = document.querySelector("#submitAnswer").value
+
+    let answerResultDescription = document.querySelector("#answerResultDescription").classList
+    answerResultDescription.remove("answerInvisibleText")
+    answerResultDescription.add("answerVisibleText")
+
+    let answerResult = document.querySelector("#answerResult")
+    answerResult.classList.remove("answerInvisibleText")
+    answerResult.classList.add("answerVisibleText")
+
+    if(answer.toLowerCase() === currentQuestion.answer.toLowerCase()){
+        answerResult.innerHTML = "Correct!"
+        humanScore += currentQuestion.value
+    }
+    else{
+        answerResult.innerHTML = "Incorrect!"
+    }
+
+}
 function setUpCategories(){
     let randomNum = Math.floor(Math.random() * 6703) // replace with 1 to keep it simple for testing
     let amount = 10 //10 is hardcoded into index.html, change it there if you want to change it here as well

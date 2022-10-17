@@ -23,7 +23,7 @@
                     <td><label for="checkboxCat10" id="cat10"></label><input type="checkbox" value="9" id="checkboxCat10"></td>
                 </tr>
             </table>
-            <input type="button" onclick="createGame();" id="submitCat" class="visibleSaveButton">
+            <button onclick="createGame();" id="submitCat" class="visibleSaveButton">Start Game</button>
         </div>
         <div>
             <table id="jeopardyBoard" class="invisibleJeopardy">
@@ -35,49 +35,54 @@
                     <th id="finalCat5"></th>
                 </tr>
                 <tr>
-                    <td><button id="100cat1" onclick='showQuestion(this.id);'class="jepButton">$100</button></td>
-                    <td><button id="100cat2" onclick='showQuestion(this.id);'class="jepButton">$100</button></td>
-                    <td><button id="100cat3" onclick='showQuestion(this.id);'class="jepButton">$100</button></td>
-                    <td><button id="100cat4" onclick='showQuestion(this.id);'class="jepButton">$100</button></td>
-                    <td><button id="100cat5" onclick='showQuestion(this.id);'class="jepButton">$100</button></td>
+                    <td><button id="100cat1" onclick='showQuestion(0,0,this.id);' class="jepButton">$100</button></td>
+                    <td><button id="100cat2" onclick='showQuestion(0,1,this.id);' class="jepButton">$100</button></td>
+                    <td><button id="100cat3" onclick='showQuestion(0,2,this.id);' class="jepButton">$100</button></td>
+                    <td><button id="100cat4" onclick='showQuestion(0,3,this.id);' class="jepButton">$100</button></td>
+                    <td><button id="100cat5" onclick='showQuestion(0,4,this.id);' class="jepButton">$100</button></td>
                 </tr>
                 <tr>
-                    <td><button id="200cat1" onclick='showQuestion(this.id);'class="jepButton">$200</button></td>
-                    <td><button id="200cat2" onclick='showQuestion(this.id);'class="jepButton">$200</button></td>
-                    <td><button id="200cat3" onclick='showQuestion(this.id);'class="jepButton">$200</button></td>
-                    <td><button id="200cat4" onclick='showQuestion(this.id);'class="jepButton">$200</button></td>
-                    <td><button id="200cat5" onclick='showQuestion(this.id);'class="jepButton">$200</button></td>
+                    <td><button id="200cat1" onclick='showQuestion(1,0,this.id);' class="jepButton">$200</button></td>
+                    <td><button id="200cat2" onclick='showQuestion(1,1,this.id);' class="jepButton">$200</button></td>
+                    <td><button id="200cat3" onclick='showQuestion(1,2,this.id);' class="jepButton">$200</button></td>
+                    <td><button id="200cat4" onclick='showQuestion(1,3,this.id);' class="jepButton">$200</button></td>
+                    <td><button id="200cat5" onclick='showQuestion(1,4,this.id);' class="jepButton">$200</button></td>
                 </tr>
                 <tr>
-                    <td><button id="300cat1" onclick='showQuestion(this.id);'class="jepButton">$300</button></td>
-                    <td><button id="300cat2" onclick='showQuestion(this.id);'class="jepButton">$300</button></td>
-                    <td><button id="300cat3" onclick='showQuestion(this.id);'class="jepButton">$300</button></td>
-                    <td><button id="300cat4" onclick='showQuestion(this.id);'class="jepButton">$300</button></td>
-                    <td><button id="300cat5" onclick='showQuestion(this.id);'class="jepButton">$300</button></td>
+                    <td><button id="300cat1" onclick='showQuestion(2,0,this.id);' class="jepButton">$300</button></td>
+                    <td><button id="300cat2" onclick='showQuestion(2,1,this.id);' class="jepButton">$300</button></td>
+                    <td><button id="300cat3" onclick='showQuestion(2,2,this.id);' class="jepButton">$300</button></td>
+                    <td><button id="300cat4" onclick='showQuestion(2,3,this.id);' class="jepButton">$300</button></td>
+                    <td><button id="300cat5" onclick='showQuestion(2,4,this.id);' class="jepButton">$300</button></td>
                 </tr>
                 <tr>
-                    <td><button id="400cat1" onclick='showQuestion(this.id);'class="jepButton">$400</button></td>
-                    <td><button id="400cat2" onclick='showQuestion(this.id);'class="jepButton">$400</button></td>
-                    <td><button id="400cat3" onclick='showQuestion(this.id);'class="jepButton">$400</button></td>
-                    <td><button id="400cat4" onclick='showQuestion(this.id);'class="jepButton">$400</button></td>
-                    <td><button id="400cat5" onclick='showQuestion(this.id);'class="jepButton">$400</button></td>
+                    <td><button id="400cat1" onclick='showQuestion(3,0,this.id);' class="jepButton">$400</button></td>
+                    <td><button id="400cat2" onclick='showQuestion(3,1,this.id);' class="jepButton">$400</button></td>
+                    <td><button id="400cat3" onclick='showQuestion(3,2,this.id);' class="jepButton">$400</button></td>
+                    <td><button id="400cat4" onclick='showQuestion(3,3,this.id);' class="jepButton">$400</button></td>
+                    <td><button id="400cat5" onclick='showQuestion(3,4,this.id);' class="jepButton">$400</button></td>
                 </tr>
                 <tr>
-                    <td><button id="500cat1" onclick='showQuestion(this.id);'class="jepButton">$500</button></td>
-                    <td><button id="500cat2" onclick='showQuestion(this.id);'class="jepButton">$500</button></td>
-                    <td><button id="500cat3" onclick='showQuestion(this.id);'class="jepButton">$500</button></td>
-                    <td><button id="500cat4" onclick='showQuestion(this.id);'class="jepButton">$500</button></td>
-                    <td><button id="500cat5" onclick='showQuestion(this.id);'class="jepButton">$500</button></td>
+                    <td><button id="500cat1" onclick='showQuestion(4,0,this.id);' class="jepButton">$500</button></td>
+                    <td><button id="500cat2" onclick='showQuestion(4,1,this.id);' class="jepButton">$500</button></td>
+                    <td><button id="500cat3" onclick='showQuestion(4,2,this.id);' class="jepButton">$500</button></td>
+                    <td><button id="500cat4" onclick='showQuestion(4,3,this.id);' class="jepButton">$500</button></td>
+                    <td><button id="500cat5" onclick='showQuestion(4,4,this.id);' class="jepButton">$500</button></td>
                 </tr>
             </table>
         </div>
         <div>
-            <p id="questionField"></p><br><br>
-            <input type="text" id="responseBox"><br>
+            <label id="questionHeader" class="questionInvisibleText">Question: </label>
+            <label id="questionLabel" class="questionInvisibleText"></label>
+            <br><br>
 
-            <button id="submit" onclick="submitAnswer();">Submit Answer</button>
-            <p id="aiResponseField"></p><br>
-            <p id="responseField"></p><br><br>
+            <label id="responseDescription" for="responseBox" class="answerInvisibleText">Answer the above question: </label>
+            <input type="text" id="responseBox" placeholder="Answer goes here" class="answerBoxInvisible">
+            <button id="submitAnswer" onclick="submitAnswer();" class="answerBoxInvisible">Submit Answer</button>
+            <br>
+
+            <label id="answerResultDescription" class="answerInvisibleText">Your answer is: </label>
+            <label id="answerResult" class="answerInvisibleText"></label>
         </div>
         <div>
             <label for="themeSelect"></label>

@@ -10,6 +10,44 @@
     background-color: black;
 }
 
+.questionInvisibleText {
+    color: goldenrod;
+    visibility: hidden;
+    font-weight: bold;
+}
+
+.questionVisibleText {
+    color: goldenrod;
+    visibility: visible;
+    font-weight: bold;
+}
+
+.answerBoxInvisible {
+    visibility: hidden;
+    position: absolute;
+    border:solid;
+    background-color: darkslateblue;
+
+}
+
+.answerBoxVisible {
+    visibility: visible;
+    position: static;
+    border:solid;
+    background-color: darkslateblue;
+
+}
+
+.answerInvisibleText {
+    color: goldenrod;
+    visibility: hidden;
+}
+
+.answerVisibleText {
+    color: goldenrod;
+    visibility: visible;
+}
+
 .jepButton {
     color:goldenrod;
     background-color: darkslateblue;
@@ -49,4 +87,3 @@
     background-color: darkslateblue;
     width: 90%;
 }
-/*light mode*

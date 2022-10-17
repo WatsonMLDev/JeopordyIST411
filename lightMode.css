@@ -9,6 +9,42 @@
     background-color: white;
 }
 
+.questionInvisibleText {
+    color: black;
+    visibility: hidden;
+    font-weight: bold;
+}
+
+.questionVisibleText {
+    color: black;
+    visibility: visible;
+    font-weight: bold;
+}
+
+.answerBoxInvisible {
+    visibility: hidden;
+    position: absolute;
+    border:solid;
+    background-color: #3d8b82;
+}
+
+.answerBoxVisible {
+    visibility: visible;
+    position: static;
+    border:solid;
+    background-color: #3d8b82;
+}
+
+.answerInvisibleText {
+    color: black;
+    visibility: hidden;
+}
+
+.answerVisibleText {
+    color: black;
+    visibility: visible;
+}
+
 .jepLButton {
     color: #000000;
     background-color: #3d8b82;
