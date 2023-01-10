@@ -1,4 +1,4 @@
-const API_TOKEN = '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'
+const API_TOKEN = 'Enter Hugging face API'
 const valueArray = [100,200,300,400,500]
 let categoryArray
 let questionArray =[[],[],[],[],[]]
