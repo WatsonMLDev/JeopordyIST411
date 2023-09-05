@@ -1,4 +1,4 @@
-const API_TOKEN = 'Enter Hugging face API'
+const API_TOKEN = 'insert token here'
 const valueArray = [100,200,300,400,500]
 let categoryArray
 let questionArray =[[],[],[],[],[]]
@@ -15,6 +15,7 @@ function onDropdownChange(){
         document.querySelector("#styleSheet").href = "lightMode.css"
     }
 }
+
 
 function setUpCategories(){
     let randomNum = Math.floor(Math.random() * 6703) // replace with 1 to keep it simple for testing
@@ -244,27 +245,43 @@ function aiTurn(){
 
 function getAiResponse(question){
     let request = new XMLHttpRequest();
-    request.open("POST",  "https://api-inference.huggingface.co/models/bigscience/bloom", false);
+    request.open("POST",  "https://api.openai.com/v1/chat/completions", false);
     request.setRequestHeader("Authorization", `Bearer ${API_TOKEN}`);
-    request.send(JSON.stringify({"inputs": `Question 1: Please answer the following Jeopardy question,\nHost: ${question}.\nAnswer: \"what is ____\"\na.`}));
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(JSON.stringify(
+        {
+            "model": "gpt-3.5-turbo",
+            "messages":[
+                {"role": "system", "content": "You are a contestent on Jeopardy, you can only answer questions with just the answer. DO NOT include \"What is\" or \"Who is\". You have 30 seconds to answer each question. Good luck!"},
+                {"role": "user", "content": "\"Saturday Night Live\" comic known for pratfalls he took imitating Gerald Ford"},
+                {"role": "assistant", "content": "Chevy Chase"},
+                {"role": "user", "content": `${question}`}
+            ]
+        }
+    ));
 
     if (request.status < 200 && request.status >= 400) {
         console.log(`Error ${request.status}: ${request.statusText}`);
         return;
     }
 
-    let response = JSON.parse(request.response);
     const nonNouns = ["a ","the "]
+    let response = JSON.parse(request.response);
+    if (response.choices && response.choices.length !== 0){
+        let singleAnswer = response.choices[0]['message']['content']
+        nonNouns.forEach((word) => {
+            if (singleAnswer.includes(word)){
+                singleAnswer = singleAnswer.replace(word.replace(" ",""), "")
+            }
+        })
+        return singleAnswer.trim()
+    }
+    else{
+        return "I don't know!"
+    }
 
-    let responseWithoutQuestion = response[0].generated_text.replace(`Question 1: Please answer the following Jeopardy question,\nHost: ${question}.\nAnswer: \"what is ____\"\n`, "")
-    let singleAnswer = responseWithoutQuestion.split("\n")[0].replace("a.", "")
 
-    nonNouns.forEach((word) => {
-        if (singleAnswer.includes(word)){
-            singleAnswer = singleAnswer.replace(word.replace(" ",""), "")
-        }
-    })
-    return singleAnswer.trim()
+
 
 }
 
